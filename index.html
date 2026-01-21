@@ -1,0 +1,1232 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Probizo - Premium Business Automation</title>
+
+  <!-- Inter Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+
+
+    <!-- Output.CSS File Linking -->
+
+    <link href="./output.css" rel="stylesheet">
+
+  <link href="./output.css" rel="stylesheet">
+  <!-- Tailwind (CDN) -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            inter: ['Inter', 'ui-sans-serif', 'system-ui', 'Segoe UI', 'Roboto', 'Arial', 'sans-serif'],
+          },
+          colors: {
+            midnight: {
+              950: '#040614',
+              900: '#060a1e',
+              850: '#070d24',
+              800: '#0b1230',
+            },
+          },
+          boxShadow: {
+            glow: '0 0 0 1px rgba(124, 58, 237, 0.25), 0 0 40px rgba(59, 130, 246, 0.18)',
+          },
+        },
+      },
+    }
+  </script>
+
+  <!-- AOS -->
+  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css" />
+
+  <!-- FontAwesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+  <style>
+    :root { color-scheme: dark; }
+    html { scroll-behavior: smooth; overflow-x: hidden; width: 100%; }
+    body { overflow-x: hidden; width: 100%; }
+
+    *, *::before, *::after { box-sizing: border-box; }
+
+    html {
+      --page-bg: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%);
+      --text: rgba(255, 255, 255, 0.98);
+      --muted-70: rgba(255, 255, 255, 0.70);
+      --muted-60: rgba(255, 255, 255, 0.60);
+      --muted-50: rgba(255, 255, 255, 0.50);
+      --muted-40: rgba(255, 255, 255, 0.40);
+      --card-bg: rgba(255, 255, 255, 0.06);
+      --card-bg-strong: rgba(255, 255, 255, 0.09);
+      --card-border: rgba(255, 255, 255, 0.10);
+      --card-border-strong: rgba(255, 255, 255, 0.14);
+      --card-shadow: none;
+      --card-shadow-strong: none;
+      --overlay-soft: radial-gradient(1200px 600px at 20% 10%, rgba(124, 58, 237, 0.18), transparent 60%),
+                     radial-gradient(1000px 600px at 80% 20%, rgba(59, 130, 246, 0.14), transparent 55%);
+    }
+
+    html[data-theme="light"] {
+      color-scheme: light;
+      --page-bg: linear-gradient(135deg, #f3f4f6 0%, #ffffff 100%);
+      --text: rgba(15, 23, 42, 0.98);
+      --muted-70: rgba(71, 85, 105, 1);
+      --muted-60: rgba(71, 85, 105, 0.92);
+      --muted-50: rgba(71, 85, 105, 0.78);
+      --muted-40: rgba(71, 85, 105, 0.65);
+      --card-bg: rgba(255, 255, 255, 0.98);
+      --card-bg-strong: rgba(255, 255, 255, 0.98);
+      --card-border: rgba(226, 232, 240, 1);
+      --card-border-strong: rgba(226, 232, 240, 1);
+      --card-shadow: 0 20px 50px rgba(2, 6, 23, 0.10);
+      --card-shadow-strong: 0 20px 50px rgba(2, 6, 23, 0.10);
+      --overlay-soft: radial-gradient(900px 420px at 20% 10%, rgba(124, 58, 237, 0.12), transparent 58%),
+                     radial-gradient(900px 420px at 80% 20%, rgba(59, 130, 246, 0.12), transparent 55%);
+    }
+
+    body {
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      color: var(--text);
+      background: var(--overlay-soft), var(--page-bg);
+      transition: background 0.5s ease-in-out, color 0.5s ease-in-out;
+    }
+
+    body * {
+      transition: color 0.5s ease-in-out, background-color 0.5s ease-in-out, border-color 0.5s ease-in-out, box-shadow 0.5s ease-in-out;
+    }
+
+    body, div {
+      transition-property: color, background-color, border-color, box-shadow;
+      transition-duration: 0.5s;
+      transition-timing-function: ease-in-out;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      body, body * { transition: none !important; }
+    }
+
+    /* Subtle mouse-follow glow */
+    .mouse-glow {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.75;
+      mix-blend-mode: screen;
+    }
+
+    html[data-theme="light"] .mouse-glow {
+      opacity: 0.42;
+      mix-blend-mode: multiply;
+    }
+
+    html[data-theme="light"] .glass,
+    html[data-theme="light"] .glass-strong {
+      backdrop-filter: none;
+      -webkit-backdrop-filter: none;
+    }
+
+    /* Glass helpers */
+    .glass {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      -webkit-backdrop-filter: blur(16px);
+      backdrop-filter: blur(16px);
+      box-shadow: var(--card-shadow);
+    }
+
+    .glass-strong {
+      background: var(--card-bg-strong);
+      border: 1px solid var(--card-border-strong);
+      -webkit-backdrop-filter: blur(18px);
+      backdrop-filter: blur(18px);
+      box-shadow: var(--card-shadow-strong);
+    }
+
+    /* Premium hover glow */
+    .hover-glow {
+      transition: transform 250ms ease, box-shadow 250ms ease, border-color 250ms ease;
+      transform-style: preserve-3d;
+    }
+
+    .hover-glow:hover {
+      box-shadow: 0 0 0 1px rgba(99, 102, 241, 0.22), 0 0 0 1px rgba(59, 130, 246, 0.16), 0 18px 60px rgba(0, 0, 0, 0.55);
+      border-color: rgba(99, 102, 241, 0.38);
+      transform: translateY(-4px);
+    }
+
+    html[data-theme="light"] .hover-glow:hover {
+      box-shadow: 0 0 0 1px rgba(99, 102, 241, 0.18), 0 18px 60px rgba(2, 6, 23, 0.12);
+      border-color: rgba(99, 102, 241, 0.28);
+    }
+
+    /* Theme-aware replacements for common Tailwind opacity utilities used in this file */
+    html[data-theme="light"] .text-white { color: rgba(15, 23, 42, 0.98) !important; }
+    html[data-theme="light"] .text-white\/10 { color: rgba(15, 23, 42, 0.10) !important; }
+    html[data-theme="light"] .text-white\/70 { color: var(--muted-70) !important; }
+    html[data-theme="light"] .text-white\/60 { color: var(--muted-60) !important; }
+    html[data-theme="light"] .text-white\/50 { color: var(--muted-50) !important; }
+    html[data-theme="light"] .text-white\/40 { color: var(--muted-40) !important; }
+
+    html[data-theme="light"] .keep-white.text-white { color: #ffffff !important; }
+
+    html[data-theme="light"] .bg-white\/5 { background-color: rgba(15, 23, 42, 0.04) !important; }
+    html[data-theme="light"] .border-white\/10 { border-color: rgba(15, 23, 42, 0.10) !important; }
+    html[data-theme="light"] .border-white\/14 { border-color: rgba(15, 23, 42, 0.12) !important; }
+    html[data-theme="light"] .border-white\/25 { border-color: rgba(59, 130, 246, 0.18) !important; }
+
+    /* Avoid AOS-induced horizontal shifts on mobile */
+    [data-aos] { backface-visibility: hidden; transform: translateZ(0); }
+
+    /* Connected steps (desktop) */
+    .step-connector {
+      position: absolute;
+      top: 50%;
+      right: -22px;
+      width: 44px;
+      height: 2px;
+      background: repeating-linear-gradient(90deg, rgba(99, 102, 241, 0.55) 0 8px, rgba(99, 102, 241, 0) 8px 16px);
+      transform: translateY(-50%);
+      opacity: 0.9;
+    }
+
+    html[data-theme="light"] .step-connector {
+      background: repeating-linear-gradient(90deg, rgba(99, 102, 241, 0.40) 0 8px, rgba(99, 102, 241, 0) 8px 16px);
+      opacity: 0.8;
+    }
+
+    .step-connector::after {
+      content: '';
+      position: absolute;
+      right: -2px;
+      top: 50%;
+      width: 8px;
+      height: 8px;
+      border-right: 2px solid rgba(168, 85, 247, 0.75);
+      border-top: 2px solid rgba(168, 85, 247, 0.75);
+      transform: translateY(-50%) rotate(45deg);
+      animation: stepArrow 1.6s ease-in-out infinite;
+    }
+
+    @keyframes stepArrow {
+      0%, 100% { transform: translateY(-50%) translateX(0) rotate(45deg); opacity: 0.8; }
+      50% { transform: translateY(-50%) translateX(4px) rotate(45deg); opacity: 1; }
+    }
+
+    /* Theme toggle icon animation */
+    #themeIcon, #themeIconMobile {
+      transition: transform 0.35s ease, opacity 0.35s ease;
+      will-change: transform;
+    }
+
+    html[data-theme="light"] #themeIcon,
+    html[data-theme="light"] #themeIconMobile {
+      transform: rotate(-18deg) scale(1.02);
+    }
+
+    /* 3D hover tilt (JS adds transform) */
+    .tilt { will-change: transform; }
+
+    /* Floating shapes */
+    .floaty {
+      animation: floaty 10s ease-in-out infinite;
+      filter: blur(0.2px);
+    }
+    .floaty.delay { animation-delay: -4s; }
+    .floaty.delay2 { animation-delay: -7s; }
+
+    @keyframes floaty {
+      0%, 100% { transform: translate3d(0, 0, 0) rotate(0deg); }
+      50% { transform: translate3d(0, -18px, 0) rotate(6deg); }
+    }
+
+    /* Counter shimmer */
+    .gradient-text {
+      background: linear-gradient(90deg, #60a5fa 0%, #a78bfa 50%, #22d3ee 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    /* Modal */
+    .modal-hidden { display: none; }
+
+    /* Light surface section helper */
+    .surface-light {
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.98) 0%, rgba(248, 250, 252, 0.98) 100%);
+      color: rgba(15, 23, 42, 0.98);
+    }
+
+    /* WhatsApp button pulse */
+    .wa-pulse::after {
+      content: '';
+      position: absolute;
+      inset: -6px;
+      border-radius: 9999px;
+      background: radial-gradient(circle, rgba(34, 197, 94, 0.35), rgba(34, 197, 94, 0) 65%);
+      animation: pulse 1.7s ease-in-out infinite;
+      z-index: -1;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(0.85); opacity: 0.55; }
+      60% { transform: scale(1.25); opacity: 0.15; }
+      100% { transform: scale(1.35); opacity: 0; }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Mouse Glow Layer -->
+  <div id="mouseGlow" class="mouse-glow"></div>
+
+  <!-- Page Wrapper -->
+  <div class="relative z-10">
+
+    <!-- Navbar -->
+    <header class="fixed top-0 left-0 right-0 z-50">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <nav class="mt-4 glass rounded-2xl">
+          <div class="flex items-center justify-between px-4 py-3 sm:px-6">
+            <a href="#top" class="flex items-center gap-3">
+              <div class="probizo-logo">
+                <svg width="26" height="26" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                  <defs>
+                    <linearGradient id="probizoGradMark" x1="2" y1="2" x2="22" y2="22" gradientUnits="userSpaceOnUse">
+                      <stop stop-color="#3B82F6" />
+                      <stop offset="0.55" stop-color="#8B5CF6" />
+                      <stop offset="1" stop-color="#22D3EE" />
+                    </linearGradient>
+                  </defs>
+                  <path d="M7.8 16.7c2.9 2.9 7.5 2.9 10.4 0 2.9-2.9 2.9-7.5 0-10.4" stroke="url(#probizoGradMark)" stroke-width="2.2" stroke-linecap="round" />
+                  <path d="M16.2 7.3c-2.9-2.9-7.5-2.9-10.4 0-2.9 2.9-2.9 7.5 0 10.4" stroke="url(#probizoGradMark)" stroke-width="2.2" stroke-linecap="round" opacity="0.85" />
+                  <path d="M9.2 12.2h5.6" stroke="url(#probizoGradMark)" stroke-width="2.2" stroke-linecap="round" />
+                </svg>
+              </div>
+              <div>
+                <div class="text-sm font-semibold tracking-wide">Probizo</div>
+                <div class="text-xs text-white/60">Premium Business Automation</div>
+              </div>
+            </a>
+
+            <div class="hidden lg:flex items-center gap-7 text-sm text-white/70">
+              <a class="hover:text-white transition" href="#services">Services</a>
+              <a class="hover:text-white transition" href="#why">Why Us</a>
+              <a class="hover:text-white transition" href="#process">How It Works</a>
+              <a class="hover:text-white transition" href="#results">Results</a>
+              <a class="hover:text-white transition" href="#contact">Contact</a>
+            </div>
+
+            <div class="flex items-center gap-3">
+              <button type="button" data-open-inquiry class="hidden sm:inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-blue-500 to-purple-600 px-4 py-2 text-sm font-semibold shadow-glow hover:opacity-95 transition">
+                <i class="fa-solid fa-bolt"></i>
+                Get Started
+              </button>
+
+              <button id="themeToggle" type="button" class="hidden sm:inline-flex items-center justify-center h-10 w-10 rounded-xl glass hover-glow" aria-label="Toggle theme">
+                <i id="themeIcon" class="fa-solid fa-moon"></i>
+              </button>
+
+              <button id="mobileMenuBtn" class="lg:hidden inline-flex items-center justify-center h-10 w-10 rounded-xl glass hover-glow" aria-label="Open menu">
+                <i class="fa-solid fa-bars"></i>
+              </button>
+            </div>
+          </div>
+
+          <div id="mobileMenu" class="lg:hidden px-4 pb-4 sm:px-6 modal-hidden">
+            <div class="mt-2 grid gap-2 text-sm text-white/70">
+              <a class="glass rounded-xl px-4 py-3 hover-glow" href="#services">Services</a>
+              <a class="glass rounded-xl px-4 py-3 hover-glow" href="#why">Why Us</a>
+              <a class="glass rounded-xl px-4 py-3 hover-glow" href="#process">How It Works</a>
+              <a class="glass rounded-xl px-4 py-3 hover-glow" href="#results">Results</a>
+              <a class="glass rounded-xl px-4 py-3 hover-glow" href="#contact">Contact</a>
+              <button id="themeToggleMobile" type="button" class="glass rounded-xl px-4 py-3 hover-glow text-left font-semibold">
+                <span class="inline-flex items-center gap-2">
+                  <i id="themeIconMobile" class="fa-solid fa-moon"></i>
+                  Theme
+                </span>
+              </button>
+              <button type="button" data-open-inquiry class="rounded-xl bg-gradient-to-r from-blue-500 to-purple-600 px-4 py-3 text-left font-semibold shadow-glow hover:opacity-95 transition">
+                Get Started
+              </button>
+            </div>
+          </div>
+        </nav>
+      </div>
+    </header>
+
+    <!-- Hero -->
+    <main id="top" class="pt-28 sm:pt-32">
+      <section class="relative">
+        <!-- Floating shapes -->
+        <div class="pointer-events-none absolute inset-0 overflow-hidden">
+          <div class="floaty absolute -top-10 left-[-24px] sm:left-[-80px] h-64 w-64 sm:h-72 sm:w-72 rounded-full bg-gradient-to-br from-blue-500/30 to-purple-600/10 blur-2xl"></div>
+          <div class="floaty delay absolute top-24 right-[-32px] sm:right-[-120px] h-72 w-72 sm:h-80 sm:w-80 rounded-full bg-gradient-to-br from-purple-600/25 to-cyan-400/10 blur-2xl"></div>
+          <div class="floaty delay2 absolute bottom-[-120px] sm:bottom-[-140px] left-[10%] sm:left-[30%] h-80 w-80 sm:h-96 sm:w-96 rounded-full bg-gradient-to-br from-cyan-400/18 to-blue-500/10 blur-3xl"></div>
+        </div>
+
+        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div class="grid items-center gap-10 lg:grid-cols-2">
+
+            <div data-aos="fade-up" data-aos-duration="800">
+              <div class="inline-flex items-center gap-2 rounded-full glass px-4 py-2 text-xs text-white/70">
+                <i class="fa-solid fa-shield-halved text-white/80"></i>
+                Premium automation built for small businesses
+              </div>
+
+              <h1 class="mt-6 text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-tight">
+                Probizo
+                <span class="block gradient-text">Premium Business Automation</span>
+              </h1>
+
+              <p class="mt-5 text-base sm:text-lg text-white/70 leading-relaxed max-w-xl">
+                Convert more leads, reply faster, and run your business like a premium brand — using WhatsApp-first automation, smart workflows, and clean systems built for growth.
+              </p>
+
+              <div class="mt-8 flex flex-col sm:flex-row gap-3">
+                <button type="button" data-open-inquiry class="inline-flex items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-blue-500 to-purple-600 px-6 py-3 font-semibold shadow-glow hover:opacity-95 transition">
+                  <i class="fa-solid fa-rocket"></i>
+                  Get Started
+                </button>
+
+                <a href="#" id="heroWhatsApp" class="inline-flex items-center justify-center gap-2 rounded-2xl glass-strong px-6 py-3 font-semibold hover-glow">
+                  <i class="fa-brands fa-whatsapp text-green-400"></i>
+                  WhatsApp
+                </a>
+              </div>
+
+              <div class="mt-8 grid grid-cols-3 gap-3 max-w-xl">
+                <div class="glass rounded-2xl p-4">
+                  <div class="text-xs text-white/60">Speed</div>
+                  <div class="mt-1 font-semibold">Instant Replies</div>
+                </div>
+                <div class="glass rounded-2xl p-4">
+                  <div class="text-xs text-white/60">Trust</div>
+                  <div class="mt-1 font-semibold">Premium Setup</div>
+                </div>
+                <div class="glass rounded-2xl p-4">
+                  <div class="text-xs text-white/60">Growth</div>
+                  <div class="mt-1 font-semibold">More Leads</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="relative" data-aos="fade-left" data-aos-duration="900">
+              <div class="glass rounded-3xl p-6 sm:p-8 hover-glow">
+                <div class="flex items-center justify-between">
+                  <div class="text-sm text-white/70">Live Automation Preview</div>
+                  <div class="inline-flex items-center gap-2 rounded-full bg-white/5 px-3 py-1 text-xs text-white/70">
+                    <span class="inline-block h-2 w-2 rounded-full bg-green-400"></span>
+                    Online
+                  </div>
+                </div>
+
+                <div class="mt-6 space-y-3">
+                  <div class="glass rounded-2xl p-4">
+                    <div class="text-xs text-white/60">Lead</div>
+                    <div class="mt-1 font-medium">“Hi, I want pricing”</div>
+                  </div>
+                  <div class="glass rounded-2xl p-4 border border-blue-500/25">
+                    <div class="text-xs text-white/60">Probizo Automation</div>
+                    <div class="mt-1 font-medium">“Sure! Sharing packages + quick demo link.”</div>
+                  </div>
+                  <div class="glass rounded-2xl p-4">
+                    <div class="text-xs text-white/60">System</div>
+                    <div class="mt-1 font-medium">Lead saved → Follow-up scheduled → Owner notified</div>
+                  </div>
+                </div>
+
+                <div class="mt-6 grid grid-cols-2 gap-3">
+                  <div class="glass rounded-2xl p-4">
+                    <div class="text-xs text-white/60">Reply time</div>
+                    <div class="mt-1 text-lg font-semibold gradient-text">&lt; 10s</div>
+                  </div>
+                  <div class="glass rounded-2xl p-4">
+                    <div class="text-xs text-white/60">Follow-ups</div>
+                    <div class="mt-1 text-lg font-semibold gradient-text">Auto</div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="pointer-events-none absolute -bottom-10 left-[-10px] sm:-left-8 h-40 w-40 rounded-3xl bg-gradient-to-br from-blue-500/25 to-purple-600/20 blur-2xl"></div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      <!-- Pain Points (Light Section) -->
+      <section class="mt-20 sm:mt-28">
+        <div class="surface-light">
+          <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16 sm:py-20">
+            <div class="grid gap-10 lg:grid-cols-2 lg:items-center">
+              <div data-aos="fade-up" data-aos-duration="700">
+                <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight">Stop Losing Leads Every Day</h2>
+                <p class="mt-4 text-slate-600 leading-relaxed">
+                  When replies are slow, follow-ups are missed, and lead data lives in chaos — businesses lose revenue daily.
+                </p>
+                <div class="mt-6 inline-flex items-center gap-2 rounded-full bg-slate-900 px-4 py-2 text-sm font-semibold text-white keep-white">
+                  <i class="fa-solid fa-triangle-exclamation"></i>
+                  Fix leaks. Capture leads. Scale confidently.
+                </div>
+              </div>
+
+              <div class="grid gap-4 sm:grid-cols-2" data-aos="fade-up" data-aos-delay="100" data-aos-duration="700">
+                <div class="rounded-2xl border border-slate-200 bg-slate-50 p-5 shadow-sm hover:shadow-md transition">
+                  <div class="text-sm font-semibold">Slow Replies</div>
+                  <div class="mt-2 text-sm text-slate-600">Leads bounce when they don’t get a reply instantly.</div>
+                </div>
+                <div class="rounded-2xl border border-slate-200 bg-slate-50 p-5 shadow-sm hover:shadow-md transition">
+                  <div class="text-sm font-semibold">No Follow-ups</div>
+                  <div class="mt-2 text-sm text-slate-600">Missed follow-ups = missed revenue.</div>
+                </div>
+                <div class="rounded-2xl border border-slate-200 bg-slate-50 p-5 shadow-sm hover:shadow-md transition">
+                  <div class="text-sm font-semibold">Untracked Leads</div>
+                  <div class="mt-2 text-sm text-slate-600">DMs, calls, WhatsApp — everything gets messy.</div>
+                </div>
+                <div class="rounded-2xl border border-slate-200 bg-slate-50 p-5 shadow-sm hover:shadow-md transition">
+                  <div class="text-sm font-semibold">Inconsistent Branding</div>
+                  <div class="mt-2 text-sm text-slate-600">Prospects expect a professional experience.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Services Grid -->
+      <section id="services" class="mt-20 sm:mt-28">
+        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div class="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between" data-aos="fade-up" data-aos-duration="700">
+            <div>
+              <h2 class="text-3xl sm:text-4xl font-extrabold">Our Automation Services</h2>
+              <p class="mt-3 text-white/70 max-w-2xl">6 premium, high-impact services designed to capture leads and run operations smoothly — with a WhatsApp-first experience.</p>
+            </div>
+            <button type="button" data-open-inquiry class="inline-flex items-center justify-center gap-2 rounded-2xl glass-strong px-5 py-3 font-semibold hover-glow">
+              <i class="fa-solid fa-circle-play"></i>
+              Request Demo
+            </button>
+          </div>
+
+          <div class="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+            <button type="button" data-service-card="WhatsApp Automation" class="tilt glass rounded-3xl p-6 text-left hover-glow" data-aos="fade-up" data-aos-delay="0">
+              <div class="flex items-start justify-between">
+                <div class="h-12 w-12 rounded-2xl bg-gradient-to-br from-blue-500/35 to-purple-600/20 grid place-items-center">
+                  <i class="fa-brands fa-whatsapp text-green-400 text-xl"></i>
+                </div>
+                <i class="fa-solid fa-arrow-right text-white/40"></i>
+              </div>
+              <div class="mt-5">
+                <div class="text-lg font-semibold">WhatsApp Automation</div>
+                <div class="mt-2 text-sm text-white/70">Instant replies, smart flows, and lead capture right inside WhatsApp.</div>
+              </div>
+            </button>
+
+            <button type="button" data-service-card="Lead Capture Systems" class="tilt glass rounded-3xl p-6 text-left hover-glow" data-aos="fade-up" data-aos-delay="50">
+              <div class="flex items-start justify-between">
+                <div class="h-12 w-12 rounded-2xl bg-gradient-to-br from-blue-500/35 to-purple-600/20 grid place-items-center">
+                  <i class="fa-solid fa-user-plus text-cyan-200 text-xl"></i>
+                </div>
+                <i class="fa-solid fa-arrow-right text-white/40"></i>
+              </div>
+              <div class="mt-5">
+                <div class="text-lg font-semibold">Lead Capture Systems</div>
+                <div class="mt-2 text-sm text-white/70">Forms, funnels, and pipelines that automatically organize leads.</div>
+              </div>
+            </button>
+
+            <button type="button" data-service-card="CRM Setup" class="tilt glass rounded-3xl p-6 text-left hover-glow" data-aos="fade-up" data-aos-delay="100">
+              <div class="flex items-start justify-between">
+                <div class="h-12 w-12 rounded-2xl bg-gradient-to-br from-blue-500/35 to-purple-600/20 grid place-items-center">
+                  <i class="fa-solid fa-diagram-project text-indigo-200 text-xl"></i>
+                </div>
+                <i class="fa-solid fa-arrow-right text-white/40"></i>
+              </div>
+              <div class="mt-5">
+                <div class="text-lg font-semibold">CRM Setup</div>
+                <div class="mt-2 text-sm text-white/70">A clean CRM that tracks every lead, stage, and follow-up.</div>
+              </div>
+            </button>
+
+            <button type="button" data-service-card="Follow-up Automation" class="tilt glass rounded-3xl p-6 text-left hover-glow" data-aos="fade-up" data-aos-delay="0">
+              <div class="flex items-start justify-between">
+                <div class="h-12 w-12 rounded-2xl bg-gradient-to-br from-blue-500/35 to-purple-600/20 grid place-items-center">
+                  <i class="fa-solid fa-clock-rotate-left text-purple-200 text-xl"></i>
+                </div>
+                <i class="fa-solid fa-arrow-right text-white/40"></i>
+              </div>
+              <div class="mt-5">
+                <div class="text-lg font-semibold">Follow-up Automation</div>
+                <div class="mt-2 text-sm text-white/70">Auto follow-ups via WhatsApp / email so leads never go cold.</div>
+              </div>
+            </button>
+
+            <button type="button" data-service-card="Website + Landing Pages" class="tilt glass rounded-3xl p-6 text-left hover-glow" data-aos="fade-up" data-aos-delay="50">
+              <div class="flex items-start justify-between">
+                <div class="h-12 w-12 rounded-2xl bg-gradient-to-br from-blue-500/35 to-purple-600/20 grid place-items-center">
+                  <i class="fa-solid fa-globe text-blue-200 text-xl"></i>
+                </div>
+                <i class="fa-solid fa-arrow-right text-white/40"></i>
+              </div>
+              <div class="mt-5">
+                <div class="text-lg font-semibold">Website + Landing Pages</div>
+                <div class="mt-2 text-sm text-white/70">High-converting pages that plug into your automation system.</div>
+              </div>
+            </button>
+
+            <button type="button" data-service-card="Analytics + Reporting" class="tilt glass rounded-3xl p-6 text-left hover-glow" data-aos="fade-up" data-aos-delay="100">
+              <div class="flex items-start justify-between">
+                <div class="h-12 w-12 rounded-2xl bg-gradient-to-br from-blue-500/35 to-purple-600/20 grid place-items-center">
+                  <i class="fa-solid fa-chart-line text-green-200 text-xl"></i>
+                </div>
+                <i class="fa-solid fa-arrow-right text-white/40"></i>
+              </div>
+              <div class="mt-5">
+                <div class="text-lg font-semibold">Analytics + Reporting</div>
+                <div class="mt-2 text-sm text-white/70">Track lead sources, conversion rates, and growth progress.</div>
+              </div>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Why Choose Us -->
+      <section id="why" class="mt-20 sm:mt-28">
+        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div class="grid gap-10 lg:grid-cols-2 lg:items-center">
+            <div data-aos="fade-up" data-aos-duration="700">
+              <h2 class="text-3xl sm:text-4xl font-extrabold">Why Choose Probizo?</h2>
+              <p class="mt-4 text-white/70 leading-relaxed">
+                We build premium automation specifically for businesses that want better lead handling, faster follow-ups, and a professional WhatsApp-first customer experience.
+              </p>
+
+              <div class="mt-8 grid gap-4">
+                <div class="glass rounded-2xl p-5 hover-glow">
+                  <div class="flex items-center gap-3">
+                    <div class="h-10 w-10 rounded-xl bg-white/5 grid place-items-center">
+                      <i class="fa-solid fa-shop text-cyan-200"></i>
+                    </div>
+                    <div class="font-semibold">Small Biz Focus</div>
+                  </div>
+                  <div class="mt-2 text-sm text-white/70">Systems that fit your workflow — not enterprise complexity.</div>
+                </div>
+
+                <div class="glass rounded-2xl p-5 hover-glow">
+                  <div class="flex items-center gap-3">
+                    <div class="h-10 w-10 rounded-xl bg-white/5 grid place-items-center">
+                      <i class="fa-solid fa-indian-rupee-sign text-green-200"></i>
+                    </div>
+                    <div class="font-semibold">Affordability</div>
+                  </div>
+                  <div class="mt-2 text-sm text-white/70">Premium outcomes without premium agency pricing.</div>
+                </div>
+
+                <div class="glass rounded-2xl p-5 hover-glow">
+                  <div class="flex items-center gap-3">
+                    <div class="h-10 w-10 rounded-xl bg-white/5 grid place-items-center">
+                      <i class="fa-brands fa-whatsapp text-green-400"></i>
+                    </div>
+                    <div class="font-semibold">WhatsApp-First</div>
+                  </div>
+                  <div class="mt-2 text-sm text-white/70">Meet customers where they already are — and convert faster.</div>
+                </div>
+
+                <div class="glass rounded-2xl p-5 hover-glow">
+                  <div class="flex items-center gap-3">
+                    <div class="h-10 w-10 rounded-xl bg-white/5 grid place-items-center">
+                      <i class="fa-solid fa-seedling text-purple-200"></i>
+                    </div>
+                    <div class="font-semibold">Growth Experts</div>
+                  </div>
+                  <div class="mt-2 text-sm text-white/70">Automation designed around conversion, retention, and scale.</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="relative" data-aos="fade-left" data-aos-duration="900">
+              <div class="glass rounded-3xl p-6 sm:p-8 hover-glow">
+                <div class="text-sm text-white/70">What you get</div>
+                <div class="mt-5 grid gap-4 sm:grid-cols-2">
+                  <div class="glass rounded-2xl p-4">
+                    <div class="text-xs text-white/60">Setup</div>
+                    <div class="mt-1 font-semibold">Done-for-you</div>
+                  </div>
+                  <div class="glass rounded-2xl p-4">
+                    <div class="text-xs text-white/60">Support</div>
+                    <div class="mt-1 font-semibold">WhatsApp help</div>
+                  </div>
+                  <div class="glass rounded-2xl p-4">
+                    <div class="text-xs text-white/60">Experience</div>
+                    <div class="mt-1 font-semibold">Premium brand feel</div>
+                  </div>
+                  <div class="glass rounded-2xl p-4">
+                    <div class="text-xs text-white/60">Automation</div>
+                    <div class="mt-1 font-semibold">Lead → Follow-up</div>
+                  </div>
+                </div>
+
+                <div class="mt-6">
+                  <button type="button" data-open-inquiry class="w-full inline-flex items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-blue-500 to-purple-600 px-6 py-3 font-semibold shadow-glow hover:opacity-95 transition">
+                    <i class="fa-solid fa-bolt"></i>
+                    Get Started
+                  </button>
+                </div>
+              </div>
+
+              <div class="pointer-events-none absolute -top-10 right-[-10px] sm:-right-10 h-44 w-44 rounded-3xl bg-gradient-to-br from-purple-600/25 to-blue-500/15 blur-2xl"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Process Timeline -->
+      <section id="process" class="mt-20 sm:mt-28">
+        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div data-aos="fade-up" data-aos-duration="700">
+            <h2 class="text-3xl sm:text-4xl font-extrabold">How It Works</h2>
+            <p class="mt-3 text-white/70 max-w-2xl">A sleek, simple process designed to get you results quickly — without complexity.</p>
+          </div>
+
+          <div class="mt-10">
+            <div class="grid gap-5 lg:grid-cols-3">
+              <div class="relative glass rounded-3xl p-6 sm:p-8 hover-glow flex flex-col items-center text-center min-h-[220px]" data-aos="fade-up" data-aos-delay="0">
+                <div class="pointer-events-none absolute inset-0 overflow-hidden rounded-3xl" aria-hidden="true">
+                  <div class="absolute left-1/2 top-4 -translate-x-1/2 text-[88px] sm:text-[92px] font-extrabold tracking-tight text-white/10">01</div>
+                </div>
+                <div class="relative z-10 mt-1 text-lg font-semibold">Analyze</div>
+                <div class="relative z-10 mt-3 text-sm text-white/70 max-w-sm">We understand your business flow, customer journey, and lead sources.</div>
+                <div class="mt-auto"></div>
+                <div class="hidden lg:block step-connector" aria-hidden="true"></div>
+              </div>
+
+              <div class="relative glass rounded-3xl p-6 sm:p-8 hover-glow flex flex-col items-center text-center min-h-[220px]" data-aos="fade-up" data-aos-delay="60">
+                <div class="pointer-events-none absolute inset-0 overflow-hidden rounded-3xl" aria-hidden="true">
+                  <div class="absolute left-1/2 top-4 -translate-x-1/2 text-[88px] sm:text-[92px] font-extrabold tracking-tight text-white/10">02</div>
+                </div>
+                <div class="relative z-10 mt-1 text-lg font-semibold">Setup</div>
+                <div class="relative z-10 mt-3 text-sm text-white/70 max-w-sm">We implement WhatsApp-first automation + systems that match your goals.</div>
+                <div class="mt-auto"></div>
+                <div class="hidden lg:block step-connector" aria-hidden="true"></div>
+              </div>
+
+              <div class="relative glass rounded-3xl p-6 sm:p-8 hover-glow flex flex-col items-center text-center min-h-[220px]" data-aos="fade-up" data-aos-delay="120">
+                <div class="pointer-events-none absolute inset-0 overflow-hidden rounded-3xl" aria-hidden="true">
+                  <div class="absolute left-1/2 top-4 -translate-x-1/2 text-[88px] sm:text-[92px] font-extrabold tracking-tight text-white/10">03</div>
+                </div>
+                <div class="relative z-10 mt-1 text-lg font-semibold">Grow</div>
+                <div class="relative z-10 mt-3 text-sm text-white/70 max-w-sm">We optimize, improve conversions, and help you scale confidently.</div>
+                <div class="mt-auto"></div>
+              </div>
+            </div>
+
+            <div class="mt-6 glass rounded-3xl p-6 sm:p-8 hover-glow" data-aos="fade-up" data-aos-delay="80">
+              <div class="text-sm text-white/70">Ready in days, not months</div>
+              <div class="mt-5 grid gap-4 lg:grid-cols-3">
+                <div class="glass rounded-2xl p-5">
+                  <div class="flex items-center gap-3 justify-center">
+                    <i class="fa-solid fa-wand-magic-sparkles text-cyan-200"></i>
+                    <div class="font-semibold">Fast Implementation</div>
+                  </div>
+                  <div class="mt-2 text-sm text-white/70 text-center">Launch a working system quickly and iterate based on results.</div>
+                </div>
+                <div class="glass rounded-2xl p-5">
+                  <div class="flex items-center gap-3 justify-center">
+                    <i class="fa-solid fa-lock text-indigo-200"></i>
+                    <div class="font-semibold">Clean & Secure</div>
+                  </div>
+                  <div class="mt-2 text-sm text-white/70 text-center">Best-practice setup with clarity, reliability, and consistency.</div>
+                </div>
+                <div class="glass rounded-2xl p-5">
+                  <div class="flex items-center gap-3 justify-center">
+                    <i class="fa-solid fa-headset text-purple-200"></i>
+                    <div class="font-semibold">Ongoing Support</div>
+                  </div>
+                  <div class="mt-2 text-sm text-white/70 text-center">WhatsApp-first support so you always know what’s happening.</div>
+                </div>
+              </div>
+
+              <div class="mt-6">
+                <button type="button" data-open-inquiry class="w-full inline-flex items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-blue-500 to-purple-600 px-6 py-3 font-semibold shadow-glow hover:opacity-95 transition">
+                  <i class="fa-solid fa-paper-plane"></i>
+                  Get Started
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Social Proof / Results -->
+      <section id="results" class="mt-20 sm:mt-28">
+        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div class="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between" data-aos="fade-up" data-aos-duration="700">
+            <div>
+              <h2 class="text-3xl sm:text-4xl font-extrabold">Real Results</h2>
+              <p class="mt-3 text-white/70 max-w-2xl">Outcomes that matter: faster response times, better conversions, and a premium customer experience.</p>
+            </div>
+            <button type="button" data-open-inquiry class="inline-flex items-center justify-center gap-2 rounded-2xl glass-strong px-5 py-3 font-semibold hover-glow">
+              <i class="fa-solid fa-comment-dots"></i>
+              Talk to Us
+            </button>
+          </div>
+
+          <div class="mt-10 grid gap-5 sm:grid-cols-3">
+            <div class="glass rounded-3xl p-6 hover-glow" data-aos="fade-up" data-aos-delay="0">
+              <div class="text-sm text-white/60">Leads captured</div>
+              <div class="mt-2 text-4xl font-extrabold gradient-text" data-counter data-target="120">0</div>
+              <div class="mt-2 text-sm text-white/70">per month (avg)</div>
+            </div>
+            <div class="glass rounded-3xl p-6 hover-glow" data-aos="fade-up" data-aos-delay="60">
+              <div class="text-sm text-white/60">Faster replies</div>
+              <div class="mt-2 text-4xl font-extrabold gradient-text" data-counter data-target="10">0</div>
+              <div class="mt-2 text-sm text-white/70">seconds or less</div>
+            </div>
+            <div class="glass rounded-3xl p-6 hover-glow" data-aos="fade-up" data-aos-delay="120">
+              <div class="text-sm text-white/60">Follow-up rate</div>
+              <div class="mt-2 text-4xl font-extrabold gradient-text" data-counter data-target="95">0</div>
+              <div class="mt-2 text-sm text-white/70">% consistency</div>
+            </div>
+          </div>
+
+          <div class="mt-10 grid gap-5 lg:grid-cols-3">
+            <div class="glass rounded-3xl p-6 hover-glow" data-aos="fade-up" data-aos-delay="0">
+              <div class="flex items-center gap-3">
+                <div class="h-11 w-11 rounded-2xl bg-white/5 grid place-items-center">
+                  <i class="fa-solid fa-arrow-trend-up text-cyan-200"></i>
+                </div>
+                <div class="text-lg font-semibold">Increase Leads</div>
+              </div>
+              <div class="mt-3 text-sm text-white/70">Capture every inquiry and convert with instant, professional conversations.</div>
+            </div>
+
+            <div class="glass rounded-3xl p-6 hover-glow" data-aos="fade-up" data-aos-delay="60">
+              <div class="flex items-center gap-3">
+                <div class="h-11 w-11 rounded-2xl bg-white/5 grid place-items-center">
+                  <i class="fa-solid fa-hourglass-half text-purple-200"></i>
+                </div>
+                <div class="text-lg font-semibold">Save Time</div>
+              </div>
+              <div class="mt-3 text-sm text-white/70">Automate repetitive replies and follow-ups so you can focus on delivery.</div>
+            </div>
+
+            <div class="glass rounded-3xl p-6 hover-glow" data-aos="fade-up" data-aos-delay="120">
+              <div class="flex items-center gap-3">
+                <div class="h-11 w-11 rounded-2xl bg-white/5 grid place-items-center">
+                  <i class="fa-solid fa-star text-green-200"></i>
+                </div>
+                <div class="text-lg font-semibold">Professional</div>
+              </div>
+              <div class="mt-3 text-sm text-white/70">A premium, consistent customer experience that builds trust instantly.</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Footer -->
+      <footer id="contact" class="mt-20 sm:mt-28 pb-14">
+        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div class="glass rounded-3xl p-8 sm:p-10">
+            <div class="grid gap-10 lg:grid-cols-4">
+              <div>
+                <div class="flex items-center gap-3">
+                  <div class="probizo-logo">
+                    <svg width="26" height="26" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                      <defs>
+                        <linearGradient id="probizoGradMarkFooter" x1="2" y1="2" x2="22" y2="22" gradientUnits="userSpaceOnUse">
+                          <stop stop-color="#3B82F6" />
+                          <stop offset="0.55" stop-color="#8B5CF6" />
+                          <stop offset="1" stop-color="#22D3EE" />
+                        </linearGradient>
+                      </defs>
+                      <path d="M7.8 16.7c2.9 2.9 7.5 2.9 10.4 0 2.9-2.9 2.9-7.5 0-10.4" stroke="url(#probizoGradMarkFooter)" stroke-width="2.2" stroke-linecap="round" />
+                      <path d="M16.2 7.3c-2.9-2.9-7.5-2.9-10.4 0-2.9 2.9-2.9 7.5 0 10.4" stroke="url(#probizoGradMarkFooter)" stroke-width="2.2" stroke-linecap="round" opacity="0.85" />
+                      <path d="M9.2 12.2h5.6" stroke="url(#probizoGradMarkFooter)" stroke-width="2.2" stroke-linecap="round" />
+                    </svg>
+                  </div>
+                  <div>
+                    <div class="font-semibold">Probizo</div>
+                    <div class="text-sm text-white/60">Premium Business Automation</div>
+                  </div>
+                </div>
+                <p class="mt-4 text-sm text-white/70 leading-relaxed">
+                  High-converting automation for small businesses — WhatsApp-first systems built to capture leads and scale.
+                </p>
+              </div>
+
+              <div>
+                <div class="text-sm font-semibold">Services</div>
+                <div class="mt-4 grid gap-2 text-sm text-white/70">
+                  <a href="#services" class="hover:text-white transition">WhatsApp Automation</a>
+                  <a href="#services" class="hover:text-white transition">Lead Capture Systems</a>
+                  <a href="#services" class="hover:text-white transition">CRM Setup</a>
+                  <a href="#services" class="hover:text-white transition">Follow-up Automation</a>
+                  <a href="#services" class="hover:text-white transition">Website + Landing Pages</a>
+                  <a href="#services" class="hover:text-white transition">Analytics + Reporting</a>
+                </div>
+              </div>
+
+              <div>
+                <div class="text-sm font-semibold">Company</div>
+                <div class="mt-4 grid gap-2 text-sm text-white/70">
+                  <a href="#why" class="hover:text-white transition">Why Choose Probizo?</a>
+                  <a href="#process" class="hover:text-white transition">How It Works</a>
+                  <a href="#results" class="hover:text-white transition">Real Results</a>
+                </div>
+              </div>
+
+              <div>
+                <div class="text-sm font-semibold">Contact</div>
+                <div class="mt-4 grid gap-3 text-sm text-white/70">
+                  <a class="inline-flex items-center gap-2 hover:text-white transition" href="tel:+917862817776">
+                    <i class="fa-solid fa-phone"></i>
+                    +91 78628 17776
+                  </a>
+                  <a class="inline-flex items-center gap-2 hover:text-white transition" href="#" id="footerWhatsApp">
+                    <i class="fa-brands fa-whatsapp text-green-400"></i>
+                    WhatsApp
+                  </a>
+                  <button type="button" data-open-inquiry class="inline-flex items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-blue-500 to-purple-600 px-5 py-3 font-semibold shadow-glow hover:opacity-95 transition">
+                    <i class="fa-solid fa-bolt"></i>
+                    Get Started
+                  </button>
+
+                  <div class="flex items-center gap-3 pt-1">
+                    <a class="h-10 w-10 rounded-xl glass grid place-items-center hover-glow" href="#" aria-label="Instagram">
+                      <i class="fa-brands fa-instagram"></i>
+                    </a>
+                    <a class="h-10 w-10 rounded-xl glass grid place-items-center hover-glow" href="#" aria-label="LinkedIn">
+                      <i class="fa-brands fa-linkedin"></i>
+                    </a>
+                    <a class="h-10 w-10 rounded-xl glass grid place-items-center hover-glow" href="#" aria-label="YouTube">
+                      <i class="fa-brands fa-youtube"></i>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="mt-10 pt-6 border-t border-white/10 flex flex-col sm:flex-row gap-3 sm:items-center sm:justify-between text-xs text-white/50">
+              <div>© <span id="year"></span> Probizo. All rights reserved.</div>
+              <div>Designed for mobile + desktop. Premium dark glass UI.</div>
+            </div>
+          </div>
+        </div>
+      </footer>
+
+    </main>
+
+    <!-- Floating WhatsApp Button -->
+    <a id="floatingWhatsApp" href="#" class="wa-pulse fixed bottom-5 right-5 z-50 h-14 w-14 rounded-full bg-[#22c55e] grid place-items-center shadow-lg hover:opacity-95 transition" aria-label="WhatsApp">
+      <i class="fa-brands fa-whatsapp text-white text-2xl"></i>
+    </a>
+
+    <!-- Service Inquiry Modal -->
+    <div id="inquiryModal" class="modal-hidden fixed inset-0 z-[60]">
+      <div id="modalBackdrop" class="absolute inset-0 bg-black/70"></div>
+
+      <div class="relative mx-auto max-w-xl px-4 sm:px-6 lg:px-8 h-full flex items-center">
+        <div class="glass-strong w-full rounded-3xl p-6 sm:p-8 shadow-2xl">
+          <div class="flex items-start justify-between gap-4">
+            <div>
+              <div class="text-sm text-white/70">Service Inquiry</div>
+              <div class="mt-1 text-2xl font-extrabold">Tell us what you need</div>
+            </div>
+            <button id="modalClose" class="h-10 w-10 rounded-xl glass hover-glow" aria-label="Close">
+              <i class="fa-solid fa-xmark"></i>
+            </button>
+          </div>
+
+          <form id="inquiryForm" class="mt-6 space-y-5">
+            <div>
+              <label class="text-sm text-white/80" for="fullName">Name</label>
+              <input id="fullName" name="fullName" type="text" required placeholder="Your name" class="mt-2 w-full rounded-2xl bg-white/5 border border-white/10 px-4 py-3 outline-none focus:border-blue-400/60 focus:ring-2 focus:ring-blue-500/20" />
+            </div>
+
+            <div>
+              <div class="text-sm text-white/80">Select Services</div>
+              <div class="mt-3 grid gap-3 sm:grid-cols-2">
+                <label class="glass rounded-2xl px-4 py-3 hover-glow cursor-pointer flex items-center gap-3">
+                  <input class="h-4 w-4" type="checkbox" name="services" value="WhatsApp Automation" />
+                  <span class="text-sm">WhatsApp Automation</span>
+                </label>
+                <label class="glass rounded-2xl px-4 py-3 hover-glow cursor-pointer flex items-center gap-3">
+                  <input class="h-4 w-4" type="checkbox" name="services" value="Lead Capture Systems" />
+                  <span class="text-sm">Lead Capture Systems</span>
+                </label>
+                <label class="glass rounded-2xl px-4 py-3 hover-glow cursor-pointer flex items-center gap-3">
+                  <input class="h-4 w-4" type="checkbox" name="services" value="CRM Setup" />
+                  <span class="text-sm">CRM Setup</span>
+                </label>
+                <label class="glass rounded-2xl px-4 py-3 hover-glow cursor-pointer flex items-center gap-3">
+                  <input class="h-4 w-4" type="checkbox" name="services" value="Follow-up Automation" />
+                  <span class="text-sm">Follow-up Automation</span>
+                </label>
+                <label class="glass rounded-2xl px-4 py-3 hover-glow cursor-pointer flex items-center gap-3">
+                  <input class="h-4 w-4" type="checkbox" name="services" value="Website + Landing Pages" />
+                  <span class="text-sm">Website + Landing Pages</span>
+                </label>
+                <label class="glass rounded-2xl px-4 py-3 hover-glow cursor-pointer flex items-center gap-3">
+                  <input class="h-4 w-4" type="checkbox" name="services" value="Analytics + Reporting" />
+                  <span class="text-sm">Analytics + Reporting</span>
+                </label>
+                <label class="glass rounded-2xl px-4 py-3 hover-glow cursor-pointer flex items-center gap-3 sm:col-span-2">
+                  <input class="h-4 w-4" type="checkbox" name="services" value="🌟 Just Want Demo" />
+                  <span class="text-sm">🌟 Just Want Demo</span>
+                </label>
+              </div>
+              <div id="serviceError" class="mt-3 text-sm text-red-300 hidden">Please select at least one service.</div>
+            </div>
+
+            <div class="flex flex-col sm:flex-row gap-3">
+              <button type="submit" class="flex-1 inline-flex items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-blue-500 to-purple-600 px-6 py-3 font-semibold shadow-glow hover:opacity-95 transition">
+                <i class="fa-brands fa-whatsapp"></i>
+                Send on WhatsApp
+              </button>
+              <button type="button" id="modalCancel" class="flex-1 inline-flex items-center justify-center gap-2 rounded-2xl glass px-6 py-3 font-semibold hover-glow">
+                <i class="fa-solid fa-ban"></i>
+                Cancel
+              </button>
+            </div>
+
+            <div class="text-xs text-white/50 leading-relaxed">
+              By submitting, you’ll be redirected to WhatsApp with a pre-filled message.
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- AOS -->
+  <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+
+  <script>
+    // AOS init
+    AOS.init({ once: true, offset: 90, duration: 800, easing: 'ease-out-cubic' });
+
+    // Theme toggle (force dark on refresh)
+    const themeToggle = document.getElementById('themeToggle');
+    const themeToggleMobile = document.getElementById('themeToggleMobile');
+    const themeIcon = document.getElementById('themeIcon');
+    const themeIconMobile = document.getElementById('themeIconMobile');
+
+    function setTheme(theme) {
+      const html = document.documentElement;
+      if (theme === 'light') html.setAttribute('data-theme', 'light');
+      else html.removeAttribute('data-theme');
+
+      const isLight = theme === 'light';
+      const iconClass = isLight ? 'fa-sun' : 'fa-moon';
+      if (themeIcon) themeIcon.className = `fa-solid ${iconClass}`;
+      if (themeIconMobile) themeIconMobile.className = `fa-solid ${iconClass}`;
+    }
+
+    function toggleTheme() {
+      const current = document.documentElement.getAttribute('data-theme') === 'light' ? 'light' : 'dark';
+      setTheme(current === 'light' ? 'dark' : 'light');
+    }
+
+    // Always start in Dark on load/refresh, regardless of any prior choice.
+    setTheme('dark');
+    if (themeToggle) themeToggle.addEventListener('click', toggleTheme);
+    if (themeToggleMobile) themeToggleMobile.addEventListener('click', toggleTheme);
+
+    // Footer year
+    document.getElementById('year').textContent = String(new Date().getFullYear());
+
+    // Mobile menu
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+    if (mobileMenuBtn && mobileMenu) {
+      mobileMenuBtn.addEventListener('click', () => {
+        mobileMenu.classList.toggle('modal-hidden');
+      });
+    }
+
+    // Smooth scroll for internal anchors (and close mobile menu)
+    document.addEventListener('click', (e) => {
+      const a = e.target.closest('a[href^="#"]');
+      if (!a) return;
+      const href = a.getAttribute('href');
+      if (!href || href === '#') return;
+
+      const target = document.querySelector(href);
+      if (!target) return;
+
+      e.preventDefault();
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+      if (mobileMenu && !mobileMenu.classList.contains('modal-hidden')) {
+        mobileMenu.classList.add('modal-hidden');
+      }
+    });
+
+    // Mouse-follow glow
+    const mouseGlow = document.getElementById('mouseGlow');
+    function setGlow(x, y) {
+      if (!mouseGlow) return;
+      mouseGlow.style.background = `radial-gradient(650px 420px at ${x}px ${y}px, rgba(124, 58, 237, 0.18), rgba(59, 130, 246, 0.10) 45%, rgba(0,0,0,0) 70%)`;
+    }
+    window.addEventListener('mousemove', (e) => setGlow(e.clientX, e.clientY), { passive: true });
+    setGlow(window.innerWidth * 0.35, window.innerHeight * 0.25);
+
+    // Tilt cards (subtle 3D effect) - only on devices that support hover + fine pointer
+    const canTilt = window.matchMedia && window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+    if (canTilt) {
+      const tiltCards = Array.from(document.querySelectorAll('.tilt'));
+      tiltCards.forEach((card) => {
+        card.addEventListener('mousemove', (e) => {
+          const r = card.getBoundingClientRect();
+          const px = (e.clientX - r.left) / r.width;
+          const py = (e.clientY - r.top) / r.height;
+          const rotY = (px - 0.5) * 10;
+          const rotX = (0.5 - py) * 10;
+          card.style.transform = `translateY(-4px) rotateX(${rotX}deg) rotateY(${rotY}deg)`;
+        });
+        card.addEventListener('mouseleave', () => {
+          card.style.transform = '';
+        });
+      });
+    }
+
+    // Modal logic
+    const inquiryModal = document.getElementById('inquiryModal');
+    const modalBackdrop = document.getElementById('modalBackdrop');
+    const modalClose = document.getElementById('modalClose');
+    const modalCancel = document.getElementById('modalCancel');
+    const inquiryForm = document.getElementById('inquiryForm');
+    const fullName = document.getElementById('fullName');
+    const serviceError = document.getElementById('serviceError');
+
+    const WHATSAPP_NUMBER = '917862817776';
+
+    function openModal(prefillService) {
+      if (!inquiryModal) return;
+      inquiryModal.classList.remove('modal-hidden');
+      document.body.style.overflow = 'hidden';
+
+      if (fullName) fullName.focus();
+
+      if (prefillService) {
+        const checkboxes = inquiryModal.querySelectorAll('input[name="services"]');
+        checkboxes.forEach((cb) => {
+          if (cb.value === prefillService) cb.checked = true;
+        });
+      }
+    }
+
+    function closeModal() {
+      if (!inquiryModal) return;
+      inquiryModal.classList.add('modal-hidden');
+      document.body.style.overflow = '';
+
+      if (serviceError) serviceError.classList.add('hidden');
+      if (inquiryForm) inquiryForm.reset();
+    }
+
+    document.querySelectorAll('[data-open-inquiry]').forEach((btn) => {
+      btn.addEventListener('click', () => openModal());
+    });
+
+    document.querySelectorAll('[data-service-card]').forEach((card) => {
+      card.addEventListener('click', () => {
+        const service = card.getAttribute('data-service-card') || '';
+        openModal(service);
+      });
+    });
+
+    if (modalBackdrop) modalBackdrop.addEventListener('click', closeModal);
+    if (modalClose) modalClose.addEventListener('click', closeModal);
+    if (modalCancel) modalCancel.addEventListener('click', closeModal);
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && inquiryModal && !inquiryModal.classList.contains('modal-hidden')) closeModal();
+    });
+
+    function buildWhatsAppUrl(name, services) {
+      const lines = [
+        `Hi Probizo,`,
+        `My name is ${name}.`,
+        `I’m interested in:`,
+        ...services.map((s) => `- ${s}`),
+      ];
+      const text = lines.join('\n');
+      const encoded = encodeURIComponent(text);
+      return `https://wa.me/${WHATSAPP_NUMBER}?text=${encoded}`;
+    }
+
+    if (inquiryForm) {
+      inquiryForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+
+        const name = (fullName?.value || '').trim();
+        const selected = Array.from(inquiryModal.querySelectorAll('input[name="services"]:checked')).map((x) => x.value);
+
+        if (!selected.length) {
+          if (serviceError) serviceError.classList.remove('hidden');
+          return;
+        }
+        if (serviceError) serviceError.classList.add('hidden');
+
+        const finalUrl = buildWhatsAppUrl(name || 'Anonymous', selected);
+        window.location.href = finalUrl;
+      });
+    }
+
+    // WhatsApp buttons (direct)
+    function openWhatsAppQuick() {
+      const text = encodeURIComponent('Hi Probizo, I want to know more about your automation services.');
+      window.location.href = `https://wa.me/${WHATSAPP_NUMBER}?text=${text}`;
+    }
+
+    const heroWhatsApp = document.getElementById('heroWhatsApp');
+    const footerWhatsApp = document.getElementById('footerWhatsApp');
+    const floatingWhatsApp = document.getElementById('floatingWhatsApp');
+
+    [heroWhatsApp, footerWhatsApp, floatingWhatsApp].forEach((el) => {
+      if (!el) return;
+      el.addEventListener('click', (e) => {
+        e.preventDefault();
+        openWhatsAppQuick();
+      });
+    });
+
+    // Animated counters
+    const counterEls = Array.from(document.querySelectorAll('[data-counter]'));
+    function animateCounter(el) {
+      const target = Number(el.getAttribute('data-target') || '0');
+      const duration = 1100;
+      const start = performance.now();
+
+      function tick(now) {
+        const t = Math.min(1, (now - start) / duration);
+        const value = Math.floor(target * (1 - Math.pow(1 - t, 3)));
+        el.textContent = String(value);
+        if (t < 1) requestAnimationFrame(tick);
+      }
+      requestAnimationFrame(tick);
+    }
+
+    if ('IntersectionObserver' in window) {
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          const el = entry.target;
+          if (el.getAttribute('data-animated') === '1') return;
+          el.setAttribute('data-animated', '1');
+          animateCounter(el);
+        });
+      }, { threshold: 0.35 });
+
+      counterEls.forEach((el) => io.observe(el));
+    } else {
+      counterEls.forEach(animateCounter);
+    }
+  </script>
+</body>
+</html>
